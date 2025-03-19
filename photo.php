@@ -1,93 +1,52 @@
 <?php require_once("includes/header.php"); ?>
-
 <?php 
-
 require_once("admin/includes/init.php");
-
 if (empty($_GET['id'])) {
-    
     redirect("index.php");
-
 }
-
 $photo = Photo::find_by_id($_GET['id']);
-
 if (isset($_POST['submit'])) {
- 
  $name    = trim($_POST['author']);
  $email   = trim($_POST['email']);
  $body    = trim($_POST['message']);
- 
-
  $comment = Comment::create_comment($photo->id, $name, $email, $body);
-
  if ($comment && $comment->save()) {
-   
    redirect("photo.php?id={$photo->id}"); 
    $session->message("Send your comment successfully.");
-
  }else{
-
    $message = "There was some problems saving";
-
  }
-
-
-
 }else{
 $message = "";
 $name    = "";
 $email   = "";
 $body    = "";
-
  }
-
-
  $comments = Comment::find_the_comments($photo->id);
-
-
  ?>
-
     <!-- Page Content -->
     <div class="container">
-
-        <div class="row">
-
-            <!-- Blog Post Content Column -->
+        <div class="row">            <!-- Blog Post Content Column -->
             <div class="col-lg-12">
-
                 <!-- Blog Post -->
-
                 <!-- Title -->
                 <h1><?php echo $photo->title; ?></h1>
-
                 <!-- Author -->
                 <p class="lead">
                     by <a href="#">Farhad</a>
                 </p>
-
                 <hr>
-
                 <!-- Date/Time -->
                <p><span class="glyphicon glyphicon-time"></span> Posted on August 24, 2023 at 9:00 PM</p> 
-
                 <hr>
-
                 <!-- Preview Image -->
                 <img class="img-responsive" src="admin/<?php echo $photo->picture_path(); ?>" alt="">
-
                 <hr>
-
                 <!-- Post Content -->
                 <p class="lead"><?php echo $photo->caption; ?></p>
                 <p><?php echo $photo->description; ?></p>
-             
-             
-
                 <hr>
-
                 <!-- Blog Comments -->
-
                 <!-- Comments Form -->
                 <div class="well">
                     <h5 class="text-center bg-info fw-bolder"><?php echo $session->message; echo $message; ?></h5>
@@ -105,13 +64,9 @@ $body    = "";
                         <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
-
                 <hr>
-
                 <!-- Posted Comments -->
-
                 <?php foreach ($comments as $comment):?>
-
                 <!-- Comment -->
                 <div class="media">
                     <a class="pull-left" href="#">
@@ -124,32 +79,9 @@ $body    = "";
                       <?php echo $comment->comment_body; ?>
                     </div>
                 </div>
-
             <?php endforeach; ?>
-
                     </div>
                 </div>
-
             </div>
-
-
-
         <hr>
-
-        <!-- Footer -->
-<!--         <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2023</p>
-                </div>
-            </div>
-            
-        </footer>
-
-    </div> -->
-    <!-- /.container -->
-
-    <!-- jQuery -->
-
-
 <?php include("includes/footer.php"); ?>
