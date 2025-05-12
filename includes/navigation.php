@@ -22,9 +22,6 @@
                     <li>
                         <a href="#">Contact</a>
                     </li>
-<!--                     <li>
-                        <a href="admin/login.php">Login</a>
-                    </li> -->
                     <li>
                         <a href="admin">Admin</a>
                     </li>

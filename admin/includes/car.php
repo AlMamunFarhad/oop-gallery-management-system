@@ -1,22 +1,8 @@
 <?php 
-
-
-
-
-
 class Car {
-
 public function hello(){
-
-echo "<h1>hello i'm</h1>";  
-
+echo "<h1>hello I'm</h1>";  
 }
-
 }
-
-
-
-
-
 
  ?>
